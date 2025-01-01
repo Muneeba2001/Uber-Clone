@@ -1,0 +1,20 @@
+{
+  "name": "uber",
+  "version": "1.0.0",
+  "description": "This is the complete workig application of uber",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node scc/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "author": "Muneeba Waseem",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "nodemon": "^3.1.7"
+  }
+}
