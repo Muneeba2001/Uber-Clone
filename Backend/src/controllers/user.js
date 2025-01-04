@@ -4,14 +4,14 @@ import bcrypt from "bcrypt"
 const userController = {
   register: async (req, res) => {
     try {
-        const { firstName, lastName, email, password } = req.body;
-      if (!firstName || !lastName || !email || !password) {
+        const { fullName, email, password } = req.body;
+      if (!fullName || !fullName.firstName || !fullName.lastName || !email || !password) {
         return res.status(400).json({ message: "All fields are required" });
       }
       const user = new userModel({
         fullName: {
-          firstName: req.body.firstName,
-          lastName: req.body.lastName,
+          firstName: fullName.firstName,
+          lastName: fullName.lastName,
         },
         email: req.body.email,
         password: await bcrypt.hash(req.body.password, 10), 
