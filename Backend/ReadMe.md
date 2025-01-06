@@ -64,3 +64,57 @@ Request Body:
   "email": "john.doe@example.com",
   "password": "password123"
 }
+```
+- POST /login: Logs in a user.
+
+URL: http://localhost:3002/login
+Request Body:
+```sh
+{
+  "email": "john.doe@example.com",
+  "password": "password123"
+}
+```
+Response:
+```sh
+{
+  "message": "user logged in",
+  "user": {
+    "_id": "user_id",
+    "fullName": {
+      "firstName": "John",
+      "lastName": "Doe"
+    },
+    "email": "john.doe@example.com",
+    "password": "hashed_password",
+    "socketId": null
+  },
+  "token": "jwt_token"
+}
+```
+- GET /profile: Retrieves the profile of the logged-in user.
+
+URL: http://localhost:3002/profile
+Response:
+```sh
+{
+  "user": {
+    "_id": "user_id",
+    "fullName": {
+      "firstName": "John",
+      "lastName": "Doe"
+    },
+    "email": "john.doe@example.com",
+    "socketId": null
+  }
+}
+```
+- GET /logout: Logs out the user.
+
+URL: http://localhost:3002/logout
+Response:
+```sh
+{
+  "message": "user logged out"
+}
+```
