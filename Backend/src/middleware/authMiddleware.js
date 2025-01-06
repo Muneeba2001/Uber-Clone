@@ -1,11 +1,15 @@
-import jwt from "jsonwebtoken";
-import userModel from "../model/user.js"; // Ensure this path is correct
-
+import jwt from 'jsonwebtoken';
+import userModel from '../model/user.js';
+import BlackListToken from '../model/blackListToken.js';
 const authMiddleware = {
   authUser: async (req, res, next) => {
-    const token = req.header("Authorization").replace("Bearer ", "");
+    const token = req.header("Authorization") || req.cookies.token;
     if (!token) {
       return res.status(401).json({ message: "Access denied. No token provided." });
+    }
+    const isBlackListed = await BlackListToken.findOne({ token: token });
+    if(isBlackListed){
+      return res.status(401).json({ message: "Access denied. Token blacklisted." });
     }
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);

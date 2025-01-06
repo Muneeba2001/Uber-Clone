@@ -1,5 +1,6 @@
 import userModel from "../model/user.js";
 import bcrypt from "bcrypt"
+import BlackListToken from "../model/blackListToken.js";
 
 const userController = {
   register: async (req, res) => {
@@ -38,6 +39,7 @@ const userController = {
         return res.status(401).json({ message: "invalid email and password" });
       }
       const token = user.generateAuthToken();
+      res.cookie("token", token);
       res.status(200).json({ message: "user logged in", user, token });
     } catch (error) {
       console.log(error);
@@ -45,7 +47,28 @@ const userController = {
     }
   },
   getUserProfile: async (req, res) => {
-
+    try {
+      const user = await userModel.findById(req.user._id).select('-password');
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      res.status(200).json({ user });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: "internal server error", error });
+    }
+  },
+  logout: async (req, res) => {
+    try {
+      const token = (req.cookies && req.cookies.token) || req.header("Authorization");
+      const blackListToken = new BlackListToken({ token });
+      await blackListToken.save();
+      res.clearCookie("token");
+      res.status(200).json({ message: "user logged out" });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: "internal server error", error });
+    }
   },
 };
 export default userController;
