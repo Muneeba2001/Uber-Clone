@@ -43,6 +43,9 @@ const userController = {
       console.log(error);
       res.status(500).json({ message: "internal server error", error });
     }
-  }
+  },
+  getUserProfile: async (req, res) => {
+
+  },
 };
 export default userController;
