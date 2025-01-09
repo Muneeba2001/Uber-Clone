@@ -6,6 +6,10 @@ const userController = {
   register: async (req, res) => {
     try {
         const { fullName, email, password } = req.body;
+        const isUserAlreadyExist = await userModel.findOne({ email });
+        if (isUserAlreadyExist) {
+          return res.status(400).json({ message: "user already exist" });
+        }
       if (!fullName || !fullName.firstName || !fullName.lastName || !email || !password) {
         return res.status(400).json({ message: "All fields are required" });
       }
