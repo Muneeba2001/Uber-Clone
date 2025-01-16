@@ -1,14 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Heading from "../components/Heading";
 
 const Home = () => {
   return (
     <div>
-      <div className="bg-cover bg-center bg-[url(https://img.freepik.com/premium-vector/traffic-light-with-red-light-it_909058-19345.jpg)] h-screen pt-8 flex justify-between flex-col w-full bg-red-400">
+      <div className="bg-cover bg-center bg-[url(https://img.freepik.com/premium-vector/traffic-light-with-red-light-it_909058-19345.jpg)] h-screen pt-8 flex justify-between flex-col w-full">
         <div>
         <img
-          className="w-16 "
+          className="w-16 ml-7 h-14 object-contain"
           src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png"
           alt=""
         />
