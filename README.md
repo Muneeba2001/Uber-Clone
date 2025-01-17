@@ -1,0 +1,44 @@
+This repository contains a complete working application of an Uber clone. The project is divided into two main parts: the backend and the frontend.
+
+.gitignore
+Backend/
+    .env
+    .prettierrc
+    package.json
+    ReadMe.md
+    src/
+        app.js
+        controllers/
+            captain.js
+            user.js
+        db/
+            config.js
+        middleware/
+            authMiddleware.js
+        model/
+            blackListToken.js
+            captain.js
+            user.js
+        routes/
+            routes.js
+            ...
+        services/
+            ...
+frontend/
+    .gitignore
+    eslint.config.js
+    index.html
+    package.json
+    postcss.config.js
+    public/
+    README.md
+    src/
+        App.jsx
+        assets/
+        components/
+        context/
+        index.css
+        main.jsx
+        pages/
+    tailwind.config.js
+    vite.config.js
