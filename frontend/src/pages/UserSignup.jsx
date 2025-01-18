@@ -1,28 +1,37 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { UserDataContext } from "../context/userContext";
 
 const UserSignup = () => {
-  const[firstName, setFirstName] = useState("")
-  const [lastName, setLastName] = useState("")
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [userData, setUserData] = useState({});
-
-  const handleSubmit = (e)=>{
+  const navigate = useNavigate();
+  const {user, setUser} = React.useContext(UserDataContext);
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setUserData({
-      FullName:{
-      firstName: firstName,
-      lastName: lastName,
-      },
-      email: email,
-      password: password,
-    });
+    const newUser = {
+      fullName:{
+        firstName: firstName,
+        lastName: lastName,
+        },
+        email: email,
+        password: password,
+    }
+    const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/register`, newUser)
+    if(response.status == 200){
+      const data = response.data;
+      setUser(data.user);
+      navigate("/home")
+    }
     setFirstName("");
     setLastName("");
     setEmail("");
     setPassword("");
-  }
+  };
   return (
     <div className="p-7 h-screen flex flex-col justify-between">
       <div>
@@ -31,9 +40,11 @@ const UserSignup = () => {
           src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png"
           alt=""
         />
-        <form onSubmit={(e)=>{
-          handleSubmit(e);
-        }}>
+        <form
+          onSubmit={(e) => {
+            handleSubmit(e);
+          }}
+        >
           <h3 className="text-base font-medium mb-2 mt-5">What's your name</h3>
           <div className="flex gap-3 mb-3">
             <input
@@ -42,8 +53,8 @@ const UserSignup = () => {
               type="text"
               placeholder="First Name"
               value={firstName}
-              onChange={(e)=>{
-               setFirstName(e.target.value)
+              onChange={(e) => {
+                setFirstName(e.target.value);
               }}
             />
             <input
@@ -52,8 +63,8 @@ const UserSignup = () => {
               type="text"
               placeholder="Last Name"
               value={lastName}
-              onChange={(e)=>{
-               setLastName(e.target.value)
+              onChange={(e) => {
+                setLastName(e.target.value);
               }}
             />
           </div>
@@ -64,9 +75,9 @@ const UserSignup = () => {
             type="email"
             placeholder="email@example.com"
             value={email}
-              onChange={(e)=>{
-               setEmail(e.target.value)
-              }}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
           />
           <h3 className="text-base font-medium mb-2">Enter Pasword</h3>
           <input
@@ -75,9 +86,9 @@ const UserSignup = () => {
             type="password"
             placeholder="password"
             value={password}
-              onChange={(e)=>{
-               setPassword(e.target.value)
-              }}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
           />
           <button className="bg-[#111] text-white font-semibold rounded px-4 py-2 border w-full text-base placeholder:text-sm">
             Signin
