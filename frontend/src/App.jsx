@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import {Routes, Route} from "react-router-dom"
 import Home from "./pages/Home";
 import UserLogin from "./pages/userLogin";
 import UserSignup from "./pages/UserSignup";
 import CaptainLogin from "./pages/CaptainLogin";
 import CaptainSignin from "./pages/CaptainSignin";
+import { UserDataContext } from "./context/userContext";
 
 const App = () => {
+  const ans = useContext(UserDataContext);
+  console.log(ans);
   return (
     <div>
       <Routes>
