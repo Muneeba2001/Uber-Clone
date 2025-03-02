@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { UserDataContext } from "../../../context/userContext";
 
 const CaptainSignin = () => {
   const [firstName, setFirstName] = useState("");
@@ -8,16 +9,18 @@ const CaptainSignin = () => {
   const [password, setPassword] = useState("");
   const [userData, setUserData] = useState({});
 
+  const navigate = useNavigate();
+const {user, setUser} = React.useContext(UserDataContext);
   const handleSubmit = (e) => {
     e.preventDefault();
-    setUserData({
+    const userData ={
       FullName: {
         firstName: firstName,
         lastName: lastName,
       },
       email: email,
       password: password,
-    });
+    }
     setFirstName("");
     setLastName("");
     setEmail("");
