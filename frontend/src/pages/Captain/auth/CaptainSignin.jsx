@@ -1,26 +1,29 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { UserDataContext } from "../../../context/userContext";
+import { CaptainDataContext } from "../../../context/CaptainContext";
 
 const CaptainSignin = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [userData, setUserData] = useState({});
+  const { captain, setCaptain } = useContext(CaptainDataContext);
+  const [vehicleColor, setVehiceColor] = useState("");
+  const [vehiclePlate, setVehicePlate] = useState("");
+  const [vehicleType, setVehiceType] = useState("");
+  const [vehicleCapacity, setVehiceCapacity] = useState("");
 
   const navigate = useNavigate();
-const {user, setUser} = React.useContext(UserDataContext);
   const handleSubmit = (e) => {
     e.preventDefault();
-    const userData ={
+    const userData = {
       FullName: {
         firstName: firstName,
         lastName: lastName,
       },
       email: email,
       password: password,
-    }
+    };
     setFirstName("");
     setLastName("");
     setEmail("");
@@ -85,7 +88,7 @@ const {user, setUser} = React.useContext(UserDataContext);
             }}
           />
           <button className="bg-[#111] text-white font-semibold rounded px-4 py-2 border w-full text-base placeholder:text-sm">
-            Signin
+            Signin as captain
           </button>
           <p className="text-center mt-2">
             Already have an account?{" "}
@@ -98,8 +101,10 @@ const {user, setUser} = React.useContext(UserDataContext);
       <div>
         <p className="text-xs text-slate-600">
           This site is protected by reCAPTCHA and{" "}
-          <span className="text-black underline cursor-pointer">Google Privacy Policy</span> and terms of
-          services apply.
+          <span className="text-black underline cursor-pointer">
+            Google Privacy Policy
+          </span>{" "}
+          and terms of services apply.
         </p>
       </div>
     </div>
