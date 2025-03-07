@@ -9,6 +9,7 @@ import { UserDataContext } from "./context/userContext";
 import Start from "./pages/Start";
 import UserProtectedWrapper from "./pages/User/UserProtectedWrapper";
 import UserLogout from "./pages/User/auth/UserLogout";
+import CaptainHome from "./pages/Captain/CaptainHome";
 
 const App = () => {
   const ans = useContext(UserDataContext);
@@ -36,6 +37,7 @@ const App = () => {
             </UserProtectedWrapper>
           }
         />
+        <Route path="/captain-home" element={<CaptainHome/>} />
       </Routes>
     </div>
   );
