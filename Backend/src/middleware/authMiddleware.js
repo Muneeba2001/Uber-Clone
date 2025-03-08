@@ -30,7 +30,8 @@ const authMiddleware = {
     }
   },
   authCaptain: async (req, res, next) => {
-    const token = req.header('Authorization') || req.cookies.token;
+    let token =
+      req.cookies.token || req.headers.authorization?.replace('Bearer ', '');
     if (!token) {
       return res
         .status(401)
