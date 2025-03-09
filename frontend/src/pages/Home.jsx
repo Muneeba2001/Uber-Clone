@@ -7,6 +7,9 @@ const position = [37.7749, -122.4194];
 
 const Home = () => {
   const navigate = useNavigate();
+  const submitHandler = (e)=>{
+    e.preventDefault();
+  }
 
   return (
     <div className="p-7 h-screen flex flex-col">
@@ -33,17 +36,24 @@ const Home = () => {
       </MapContainer>
       {/* Find a Trip Section - Now BELOW the Map */}
       <div className="w-full bg-white bottom-0  absolute">
-        <h4 className="text-3xl font-semibold mb-2">Find a Trip</h4>
-        <input
-          type="text"
-          className="w-full p-2 border bg-gray-300 rounded"
-          placeholder="Add a pick location"
-        />
-        <input
-          type="text"
-          className="w-full p-2 border bg-gray-300 rounded mt-2"
-          placeholder="Add a drop location"
-        />
+        <div>
+          <h4 className="text-3xl font-semibold mb-2">Find a Trip</h4>
+          <form onSubmit={(e)=>{
+            submitHandler(e);
+          }}>
+          <input
+            type="text"
+            className="w-full p-2 border bg-gray-300 rounded"
+            placeholder="Add a pick location"
+          />
+          <input
+            type="text"
+            className="w-full p-2 border bg-gray-300 rounded mt-2"
+            placeholder="Add a drop location"
+          />
+          </form>
+        </div>
+        <div className="h-0"></div>
       </div>
     </div>
   );
